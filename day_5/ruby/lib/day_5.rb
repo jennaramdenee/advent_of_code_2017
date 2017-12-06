@@ -1,4 +1,4 @@
-input = '0
+input = "0
 0
 0
 1
@@ -1087,28 +1087,36 @@ input = '0
 -939
 -586
 -913
--858'
+-858"
 
 def convert_to_int(input)
   input.split("\n").map(&:to_i)
 end
 
 def new_index(current_position, movement)
+  # (current_position + movement < 0) ? 0 : (current_position + movement)
   current_position + movement
 end
 
 def in_maze?(position, maze)
-  position < maze.length
+  position < maze.length && position >= 0
 end
 
-def calculate_steps(maze, index)
-  return step_count unless in_maze?(new_index, maze)
-
-  maze[index] += 1
-  index = new_index
-  step_count += 1
+def calculate_steps(maze, index, step_count)
+  # Calculate new position
   new_position = new_index(index, maze[index])
-  calculate_steps(maze, new_position)
+  # Add to step count, another iteration complete
+  step_count += 1
+  # If it falls out of range, exit
+  return step_count unless in_maze?(new_position, maze)
+
+  # Increase value by 1
+  maze[index] += 1
+  # Change position of index to be new position
+  index = new_position
+
+  # Do it again
+  calculate_steps(maze, index, step_count)
 end
 
 def solve(input)
@@ -1116,7 +1124,7 @@ def solve(input)
   step_count = 0
 
   maze = convert_to_int(input)
-  calculate_steps(maze, index)
+  calculate_steps(maze, index, step_count)
 end
 
-# calculate_steps(input)
+# puts solve(input)

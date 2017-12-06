@@ -29,6 +29,12 @@ RSpec.describe 'Day 5' do
         expect(new_index(4, -2)).to eq(2)
       end
     end
+
+    # context 'with a negative movement that places position below zero' do
+    #   it 'returns a new position behind of current position' do
+    #     expect(new_index(4, -7)).to eq(0)
+    #   end
+    # end
   end
 
   context '#in_maze?' do
@@ -38,6 +44,10 @@ RSpec.describe 'Day 5' do
 
     it 'returns false if a given position is not in the maze' do
       expect(in_maze?(7, [1,35,6,7])).to eq(false)
+    end
+
+    it 'returns false if a given position is less than zero' do
+      expect(in_maze?(-3, [1,35,6,7])).to eq(false)
     end
   end
 
