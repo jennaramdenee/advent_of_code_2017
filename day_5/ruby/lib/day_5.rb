@@ -1101,21 +1101,22 @@ def in_maze?(position, maze)
   position < maze.length
 end
 
-def calculate_steps(maze)
-  new_index = new_index(index, maze[index])
+def calculate_steps(maze, index)
   return step_count unless in_maze?(new_index, maze)
 
   maze[index] += 1
   index = new_index
   step_count += 1
-  calculate_steps(maze)
+  new_position = new_index(index, maze[index])
+  calculate_steps(maze, new_position)
 end
 
 def solve(input)
-  maze = convert_to_int(input)
-  step_count = 0
   index = 0
-  calculate_steps(maze)
+  step_count = 0
+
+  maze = convert_to_int(input)
+  calculate_steps(maze, index)
 end
 
 # calculate_steps(input)

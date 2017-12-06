@@ -43,7 +43,7 @@ RSpec.describe 'Day 5' do
 
   context '#solve' do
     it 'calculates the correct number of steps to exit the maze' do
-      expect(calculate_steps("0\n3\n0\n1\n-3")).to eq(5)
+      expect(solve("0\n3\n0\n1\n-3")).to eq(5)
     end
   end
 
